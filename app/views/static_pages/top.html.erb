@@ -1,0 +1,25 @@
+<% provide(:title,"Top")%>
+<!DOCTYPE>
+<html>
+  <head>
+    <title><%=yield(:titile)%></title>
+  </head>
+  <body>
+    
+    <div class="left">
+      <i><h1>TaskApp</h1></i>
+      <p>TaskAppは簡易ToDo管理ツールです。</p>
+      <p>↓↓初めてのご利用↓↓</p>
+      <%=link_to "create account",signup_path,class:"btn btn-lg btn-success"%>
+      <p>
+      <%=link_to "guest login",'#',class:"btn btn-lg btn-danger"%>
+      <%=link_to "guest login normal",'#',class:"btn btn-lg btn-warning"%>
+      </p>
+    </div>
+    
+    <div class="right">
+      <%=render 'static_pages/first'%>
+    </div>
+    
+  </body>
+</html>
