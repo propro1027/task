@@ -1,0 +1,18 @@
+<%provide(:title,@user.name)%>
+<h1>プロフィール</h1>
+
+<table class="user-table">
+  <tr>
+    <th>ID</th><th><%=@user.id%></th>
+  </tr>
+  <tr>
+    <th>名前</th><th><%=@user.name%></th>
+  </tr>
+  <tr>
+    <th>メールアドレス</th><th><%=@user.email%></th>
+  </tr>
+  <tr>
+    <th>作成日</th><th><%=@user.created_at%></th>
+  </tr>
+  
+</table>

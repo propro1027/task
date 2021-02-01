@@ -1,12 +1,21 @@
 source 'https://rubygems.org'
 
+gem 'rails',        '~> 5.1.6'
 # bootstrap
 gem 'bootstrap-sass' 
 
 # パスワードをハッシュ化する
 gem 'bcrypt'
 
-gem 'rails',        '~> 5.1.6'
+gem 'faker' # 実際に存在していそうな名前を生成してくれる
+
+# ページネーション機能を追加
+gem 'will_paginate' 
+# ページネーションのデザインをお手軽に良くする
+gem 'bootstrap-will_paginate' 
+
+
+
 gem 'puma',         '~> 3.7'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
