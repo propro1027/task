@@ -2,7 +2,6 @@
 <h1>ログイン</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <!--form_with(model: @user, local: true)今回はこのような記述は出来ないので、リソース名（session）と対応するルーティングを具体的に指定する必要があります。-->
     <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
 
       <%= f.label :email, class: "label-login" %>
@@ -19,5 +18,31 @@
       <%= f.submit "ログイン", class: "btn btn-warning btn-block btn-login" %>
     <% end %>
     
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <!--form_with(model: @user, local: true)今回はこのような記述は出来ないので、リソース名（session）と対応するルーティングを具体的に指定する必要があります。-->
+
+    <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+
+      <%= f.label :email, "メールアドレス", class: "label-login" %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password, "パスワード", class: "label-login" %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :remember_me, class: "checkbox inline checkbox-login", for: "remember-me" do %>
+        <%= f.check_box :remember_me, id: "remember-me" %>
+        <span>ログイン情報を記憶する</span>
+      <% end %>
+
+      <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %>
+    <% end %>
+    <p>
+      ユーザー登録がまだの場合は<%= link_to "こちら", signup_path %>
+    </p>
   </div>
 </div>

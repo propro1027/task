@@ -14,6 +14,8 @@ gem 'will_paginate'
 # ページネーションのデザインをお手軽に良くする
 gem 'bootstrap-will_paginate' 
 
+# ailsアプリケーションの日本語化や国際化
+gem 'rails-i18n' 
 
 
 gem 'puma',         '~> 3.7'
