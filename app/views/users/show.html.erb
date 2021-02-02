@@ -16,3 +16,22 @@
   </tr>
   
 </table>
+
+<div>
+  <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>時間管理表</td>
+      <td>指定勤務時間：<%= format_basic_info(@user.work_time) %></td>
+      <td>基本時間：<%= format_basic_info(@user.basic_time) %></td>
+      <td>月初日</td>
+    </tr>
+
+    <tr>
+       <!--@userのユーザーオブジェクトにdepartmentが存在するか？を確認 存在する場合はその値を、存在しない場合は"未所属"という文字列を出力-->
+      <td>所属：<%= @user.department.present? ? @user.department : "未所属" %></td>
+      <td> 名前：<%= @user.name %></td>
+      <td>出勤日数</td>
+      <td>月末日</td>
+    </tr>
+  </table>
+</div>

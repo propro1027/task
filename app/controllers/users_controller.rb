@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   # 自分以外のユーザーの情報を更新できないよう制御するシステムを実装
   # editとupdateアクションが実行される直前にlogged_in_userメソッドが実行されるようになります。
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+before_action :correct_user, only: [:edit, :update]
+before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
   
 #   腕の良い攻撃者がコマンドラインからDELETEリクエストを直接発行するという攻撃方法でユーザーを全て削除してしまうことも可能です。
 # そのため、destroyアクションには追加で制限を加える必要があります。
@@ -36,7 +37,6 @@ class UsersController < ApplicationController
   
   #編集
   def edit
-   
   end
   
   
@@ -57,13 +57,30 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+   def edit_basic_info
+   end
+
+
+def update_basic_info
+  if @user.update_attributes(basic_info_params)
+    flash[:success] = "#{@user.name}の基本情報を更新しました。"
+  else
+     # エラーメッセージの配列の各要素を区切る際、<br>を使用するよう再設定しました
+    flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+  end
+  redirect_to users_url
+end
   
   private
   
       def user_strong
-        params.require(:user).permit(:name,:email,:password, :password_confirmation)
+        params.require(:user).permit(:name,:email, :department, :password, :password_confirmation)
       end
       
+      # 編集ページの用意が出来ましたので、仕上げに更新アクション
+      def basic_info_params
+        params.require(:user).permit(:department, :basic_time, :work_time)
+      end
       
 # beforeフィルター
 

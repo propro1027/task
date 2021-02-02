@@ -1,0 +1,5 @@
+<!--パーシャルをレンダリング-->
+$("#edit-basic-info").html("<%= escape_javascript(render 'edit_basic_info') %>");
+
+<!--モーダルウインドウとして表示を実行-->
+$("#edit-basic-info").modal("show");

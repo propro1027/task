@@ -11,6 +11,13 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true        
                     
+   # inオプションを指定,範囲オブジェクトである2..30を設定することで、目的である「2文字以上かつ30文字以下」という検証を追加
+  # 値が空文字""の場合バリデーションをスルーします
+    validates :department, length: { in: 2..30 }, allow_blank: true
+    
+  validates :basic_time, presence: true
+  validates :work_time, presence: true
+   
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   

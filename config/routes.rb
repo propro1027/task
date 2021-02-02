@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
-  
-  
-  resources:users
+  # モーダルウインドウを表示
+  # 今回はUsersリソースにメンバー（member）ルーティングを追加する手法
+   resources :users do
+    member do
+      get 'edit_basic_info'
+      patch 'update_basic_info'
+    end
+  end
 end
