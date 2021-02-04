@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+ 
+
+ 
   # 自分以外のユーザーの情報を更新できないよう制御するシステムを実装
   # editとupdateアクションが実行される直前にlogged_in_userメソッドが実行されるようになります。
 before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
@@ -9,6 +12,10 @@ before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info
 #   腕の良い攻撃者がコマンドラインからDELETEリクエストを直接発行するという攻撃方法でユーザーを全て削除してしまうことも可能です。
 # そのため、destroyアクションには追加で制限を加える必要があります。
   before_action :admin_user, only: :destroy
+  before_action :set_one_month, only: :show
+
+
+
   # ユーザー一覧
    def index
      @users = User.paginate(page: params[:page])
@@ -16,8 +23,15 @@ before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info
   
   
   def show
-    @user = User.find(params[:id])
-    # flash.now[:success] = 'ユーザーの新規作成に成功しましたaaaaa。'
+    
+    # @first_dayと@last_dayはshowアクションからこちらへ引っ越すことになります。
+    # @user = User.find(params[:id])
+  # 当日を取得するためDate.currentを使うこれにRailsのメソッドであるbeginning_of_monthを繋げ当月の初日を取得することが可能
+    @first_day = Date.current.beginning_of_month
+    # end_of_monthは当月の終日を取得することが可能です。
+    @last_day = @first_day.end_of_month
+    # 「1ヶ月間で何日出勤したか」を表示
+    @worked_sum = @attendances.where.not(started_at: nil).count
   end
 
   def new

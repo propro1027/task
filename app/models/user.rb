@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  
+  # has_many ~と記述,また多数所持するため、複数形（attendances）userが親attendancesが子
+# ruby:Userモデルデータが削除されると、関連するAttendanceモデルのデータもまとめて削除される
+ has_many :attendances, dependent: :destroy
+  
   # 「remember_token」という仮想の属性を作成します。
   attr_accessor :remember_token
   
